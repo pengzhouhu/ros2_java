@@ -26,7 +26,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - colcon_defaults: |
+          - colcon_meta: |
               {
                 "names": {
                   "rcl": {
@@ -91,7 +91,7 @@ jobs:
         rm -rf src/ros2-java/ros2_java
         ln --symbolic ${{ github.workspace }} src/ros2-java
     - name: Create colcon defaults file
-      run: printf "${{matrix.colcon_defaults}}" > ${{ github.workspace }}/COLCON_DEFAULTS.yaml
+      run: printf "${{matrix.colcon_meta}}" > ${{ github.workspace }}/colcon.meta
     - name: Build ros2_java for Android
       run: |
         export PYTHON3_EXEC="$( which python3 )"
@@ -101,12 +101,12 @@ jobs:
         export ANDROID_NATIVE_API_LEVEL=android-21
         export ANDROID_TOOLCHAIN_NAME=arm-linux-androideabi-clang
         export ANDROID_NDK=${PWD}/android-ndk-r21d
-        export COLCON_DEFAULTS_FILE=${{ github.workspace }}/COLCON_DEFAULTS.yaml
 
         cd ros2_java_ws
         colcon build \
           --packages-ignore cyclonedds rcl_logging_log4cxx rosidl_generator_py \
           --packages-up-to rcljava \
+          --metas ${{ github.workspace }}/colcon.meta \
           --cmake-args \
           -DPYTHON_EXECUTABLE=${PYTHON3_EXEC} \
           -DPYTHON_LIBRARY=${PYTHON3_LIBRARY} \
