@@ -22,33 +22,36 @@ jobs:
 
   build_android:
     runs-on: ubuntu-20.04
-    include:
-      - colcon_defaults: |
-          {
-            "names": {
-              "rcl": {
-                "cmake-args": [ "-DBUILD_TESTING=OFF" ]
-              },
-              "rcl_yaml_param_parser": {
-                "cmake-args": [ "-DBUILD_TESTING=OFF" ]
-              },
-              "rclcpp": {
-                "cmake-args": [ "-DBUILD_TESTING=OFF" ]
-              },
-              "rclcpp_action": {
-                "cmake-args": [ "-DBUILD_TESTING=OFF" ]
-              },
-              "rclcpp_lifecycle": {
-                "cmake-args": [ "-DBUILD_TESTING=OFF" ]
-              },
-              "rcutils": {
-                "cmake-args": [ "-DBUILD_TESTING=OFF" ]
-              },
-              "rosidl_typesupport_c": {
-                "cmake-args": [ "-DBUILD_TESTING=OFF" ]
-              },
-            }
-          }
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - colcon_defaults: |
+              {
+                "names": {
+                  "rcl": {
+                    "cmake-args": [ "-DBUILD_TESTING=OFF" ]
+                  },
+                  "rcl_yaml_param_parser": {
+                    "cmake-args": [ "-DBUILD_TESTING=OFF" ]
+                  },
+                  "rclcpp": {
+                    "cmake-args": [ "-DBUILD_TESTING=OFF" ]
+                  },
+                  "rclcpp_action": {
+                    "cmake-args": [ "-DBUILD_TESTING=OFF" ]
+                  },
+                  "rclcpp_lifecycle": {
+                    "cmake-args": [ "-DBUILD_TESTING=OFF" ]
+                  },
+                  "rcutils": {
+                    "cmake-args": [ "-DBUILD_TESTING=OFF" ]
+                  },
+                  "rosidl_typesupport_c": {
+                    "cmake-args": [ "-DBUILD_TESTING=OFF" ]
+                  },
+                }
+              }
     steps:
     - name: Install Java
       run: |
