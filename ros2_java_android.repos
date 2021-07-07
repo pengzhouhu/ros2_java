@@ -102,7 +102,7 @@ repositories:
   ros2/rcutils:
     type: git
     url: https://github.com/ros2/rcutils.git
-    version: ivanpauno/fix-android-build-galactic
+    version: galactic
   ros2/rmw:
     type: git
     url: https://github.com/ros2/rmw.git
