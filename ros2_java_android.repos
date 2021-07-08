@@ -107,6 +107,10 @@ repositories:
     type: git
     url: https://github.com/ros2/rmw.git
     version: galactic
+  ros2/rmw_dds_common:
+    type: git
+    url: https://github.com/ros2/rmw_dds_common.git
+    version: galactic
   ros2/rmw_fastrtps:
     type: git
     url: https://github.com/ros2/rmw_fastrtps.git
